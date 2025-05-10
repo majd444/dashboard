@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Dashboard</title>
+    <meta name="description" content="A modern admin dashboard interface">
+    
+    <!-- CSS Stylesheets -->
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Chart.js for data visualization -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="dashboard">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="logo">
+                <i class="fas fa-bolt"></i> DashBoard
+            </div>
+            
+            <ul class="nav-menu">
+                <li class="nav-item active">
+                    <i class="fas fa-home"></i> Dashboard
+                </li>
+                <li class="nav-item">
+                    <i class="fas fa-chart-line"></i> Analytics
+                </li>
+                <li class="nav-item">
+                    <i class="fas fa-shopping-cart"></i> Products
+                </li>
+                <li class="nav-item">
+                    <i class="fas fa-users"></i> Customers
+                </li>
+                <li class="nav-item">
+                    <i class="fas fa-wallet"></i> Finance
+                </li>
+                <li class="nav-item">
+                    <i class="fas fa-comments"></i> Messages
+                </li>
+                <li class="nav-item">
+                    <i class="fas fa-cog"></i> Settings
+                </li>
+                <li class="nav-item">
+                    <i class="fas fa-question-circle"></i> Help Center
+                </li>
+            </ul>
+        </aside>
+        
+        <!-- Header -->
+        <header class="header">
+            <button class="btn-mobile-menu" onclick="toggleMobileMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <div class="search-bar">
+                <input type="text" placeholder="Search...">
+            </div>
+            
+            <div class="user-menu">
+                <div class="notifications">
+                    <i class="fas fa-bell"></i>
+                </div>
+                <div class="avatar">MJ</div>
+            </div>
+        </header>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <h1 class="page-title">Dashboard Overview</h1>
+            
+            <!-- Stats Cards -->
+            <div class="dashboard-grid">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">Total Users</h2>
+                        <div class="card-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="stats" id="totalUsers">12,875</div>
+                        <div class="stats-details">
+                            <span class="stats-label">Growth</span>
+                            <span class="stats-growth text-success" id="userGrowth">+12.5%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-value" data-percent="75" style="width: 75%"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">Revenue</h2>
+                        <div class="card-icon">
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="stats" id="revenue">$52,890</div>
+                        <div class="stats-details">
+                            <span class="stats-label">Growth</span>
+                            <span class="stats-growth text-success" id="revenueGrowth">+8.2%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-value" data-percent="65" style="width: 65%"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">Orders</h2>
+                        <div class="card-icon">
+                            <i class="fas fa-shopping-bag"></i>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="stats" id="orders">2,890</div>
+                        <div class="stats-details">
+                            <span class="stats-label">Growth</span>
+                            <span class="stats-growth text-success" id="ordersGrowth">+5.7%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-value" data-percent="45" style="width: 45%"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">Conversion Rate</h2>
+                        <div class="card-icon">
+                            <i class="fas fa-chart-pie"></i>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="stats" id="conversion">3.2%</div>
+                        <div class="stats-details">
+                            <span class="stats-label">Growth</span>
+                            <span class="stats-growth text-success" id="conversionGrowth">+1.5%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-value" data-percent="32" style="width: 32%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Charts Section -->
+            <div class="dashboard-grid">
+                <div class="card" style="grid-column: span 2;">
+                    <div class="card-header">
+                        <h2 class="card-title">Sales Overview</h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="chart-container">
+                            <canvas id="salesChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">Traffic Sources</h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="chart-container">
+                            <canvas id="trafficChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Recent Activity -->
+            <div class="dashboard-grid">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">Recent Activity</h2>
+                    </div>
+                    <div class="card-content">
+                        <ul class="activity-list">
+                            <!-- Activity items will be inserted by JavaScript -->
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="card" style="grid-column: span 2;">
+                    <div class="card-header">
+                        <h2 class="card-title">Recent Orders</h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Order ID</th>
+                                        <th>Customer</th>
+                                        <th>Date</th>
+                                        <th>Amount</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>#ORD-5531</td>
+                                        <td>John Doe</td>
+                                        <td>May 9, 2025</td>
+                                        <td>$125.00</td>
+                                        <td><span class="badge badge-success">Completed</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>#ORD-5530</td>
+                                        <td>Jane Smith</td>
+                                        <td>May 8, 2025</td>
+                                        <td>$245.99</td>
+                                        <td><span class="badge badge-primary">Processing</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>#ORD-5529</td>
+                                        <td>Robert Johnson</td>
+                                        <td>May 8, 2025</td>
+                                        <td>$89.50</td>
+                                        <td><span class="badge badge-success">Completed</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>#ORD-5528</td>
+                                        <td>Sarah Williams</td>
+                                        <td>May 7, 2025</td>
+                                        <td>$312.00</td>
+                                        <td><span class="badge badge-warning">Pending</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>#ORD-5527</td>
+                                        <td>Michael Brown</td>
+                                        <td>May 7, 2025</td>
+                                        <td>$76.25</td>
+                                        <td><span class="badge badge-danger">Cancelled</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <!-- JavaScript -->
+    <script src="js/dashboard.js"></script>
+</body>
+</html>
